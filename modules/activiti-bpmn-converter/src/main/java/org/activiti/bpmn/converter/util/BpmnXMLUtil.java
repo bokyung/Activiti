@@ -97,12 +97,12 @@ public class BpmnXMLUtil implements BpmnXMLConstants {
   }
   
   public static void parseChildElements(String elementName, BaseElement parentElement, XMLStreamReader xtr, 
-      Map<String, BaseChildElementParser> childParsers, BpmnModel model) throws Exception {
+      Map<String, BaseChildElementParser> childParserMap, BpmnModel model) throws Exception {
     
-    if (childParsers == null) {
-      childParsers = new HashMap<String, BaseChildElementParser>();
+    Map<String, BaseChildElementParser> childParsers = new HashMap<String, BaseChildElementParser>(genericChildParserMap);
+    if (childParserMap != null) {
+      childParsers.putAll(childParserMap);
     }
-    childParsers.putAll(genericChildParserMap);
 
     boolean inExtensionElements = false;
     boolean readyWithChildElements = false;
